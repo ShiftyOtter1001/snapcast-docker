@@ -1,0 +1,27 @@
+version: "3"
+services:
+  snapcast:
+    container_name: snapcast
+    image: ghcr.io/shiftyotter1001/snapcast-docker:latest
+    hostname: snapcast
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+    restart: "unless-stopped"
+    network_mode: host
+    volumes:
+      - /opt/snapcast/config/:/config/
+      - /opt/snapcast/data/:/data/
+      - /opt/snapcast/audio-fifos/:/audio/
+
+  go-librespot:
+    container_name: go-librespot
+    image: ghcr.io/shiftyotter1001/snapcast-docker:latest
+    hostname: go-librespot
+    restart: "unless-stopped"
+    network_mode: host
+    command: go-librespot --config_dir /config/go-librespot
+    volumes:
+      - /opt/snapcast/config/:/config/
+      - /opt/snapcast/audio-fifos/:/audio/
