@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y \
     libasound2 \
     libvorbisidec1 \
     libopus0 \
-#    python3 \
-#    python3-websockets \
+    python3 \
+    python3-websockets \
     && rm -rf /var/lib/apt/lists/*
 
 COPY go-librespot /usr/bin/go-librespot
